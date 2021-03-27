@@ -1,0 +1,63 @@
+@import "./variables&mixins";
+
+.header {
+    height: 14.375rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-image: url("../images/bg-mobile-light.jpg");
+    background-size: cover;
+    @include transition(background-image);
+
+    @include media-query(tablet) {
+        background-image: url("../images/bg-desktop-light.jpg");
+    }
+
+    &__toggle-btn {
+        cursor: pointer;
+    }
+
+    &__light-mode {
+        display: none;
+    }
+
+    &__dark-mode {
+        display: block;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: Min(36rem, 100%);
+        margin: 0 auto;
+    }
+
+    &__title {
+        font-family: $font-family;
+        color: $white;
+        letter-spacing: .5rem;
+        cursor: default;
+    }
+
+    &__form {
+        position: relative;
+        width: Min(36rem, 100%);
+        margin: 0 auto;
+    }
+
+    &__input {
+        width: 100%;
+        outline: none;
+        border: none;
+        padding: 1rem 3.5rem;
+        border-radius: .25rem;
+        font-family: $font-family;
+        @include transition(background-color);
+        
+        &::placeholder {
+            color: $darkGrayishBlue;
+        }
+    }
+}

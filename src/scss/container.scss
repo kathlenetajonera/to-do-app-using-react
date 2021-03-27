@@ -1,0 +1,157 @@
+@import "./variables&mixins";
+
+.container {
+    padding: 1.5rem 1.5rem 10rem 1.5rem;
+    min-height: calc(100vh - 14.375rem);
+    // min-height: 80vh;
+    background-color: $veryLightGray;
+    
+    @include transition(background-color);
+
+    &__inner {
+        transform: translateY(-3rem);
+    }
+}
+
+.toDo {
+    list-style-type: none;
+    padding: 0;
+    border-radius: .25rem;
+    position: relative;
+    background-color: $white;
+    width: Min(36rem, 100%);
+    margin: 0 auto;
+    @include transition(background-color);
+    $self: &;
+
+    &__list {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid $veryLightGray;
+        @include transition(border-bottom);
+        cursor: pointer;
+
+        &--dragging {
+            opacity: .5;
+        }
+
+        &--inactive {
+            background: rgb(235, 235, 235);
+        }
+
+        &--dropzone {
+            background: rgb(214, 212, 212);
+        }
+
+        @include media-query(tablet) {
+            &:hover {
+                #{ $self }__remove {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &__text {
+        font-family: $font-family;
+        font-size: .9rem;
+        color: $veryDarkGrayishBlue;
+        display: inline-flex;
+        margin: 0 .8rem;
+        @include transition(color);
+
+        &--checked {
+            color: $lightGrayishBlue;
+            text-decoration: line-through;
+        }
+    }
+
+    &__remove {
+        margin-left: auto;
+        width: .9rem;
+        cursor: pointer;
+
+        @include media-query(tablet) {
+            display: none;
+        }
+    }
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    font-family: $font-family;
+    font-size: .9rem;
+    padding: 1.5rem;
+    color: $darkGrayishBlue;
+    background-color: $white;
+    width: Min(36rem, 100%);
+    margin: 0 auto;
+    @include transition(background-color);
+
+    &__remaining, &__clear {
+        margin: 0;
+    }
+
+    &__remaining {
+        cursor: default;
+    }
+
+    &__clear {
+        cursor: pointer;
+
+        &:hover {
+            color: $veryDarkGrayishBlue; 
+        }
+    }
+
+    &__categories {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: Min(36rem, 100%);
+        padding: 1.5rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 130%);
+        border-radius: .25rem;
+        background-color: $white;
+        @include transition(background-color);
+    
+        @include media-query(tablet) {
+            position: initial;
+            width: initial;
+            transform: none;
+            padding: 0;
+            border-radius: 0;
+            background-color: transparent;
+        }
+    }
+
+    &__category {
+        margin: 0 .8rem;
+        cursor: pointer;
+
+        &:hover {
+            color: $veryDarkGrayishBlue; 
+        }
+
+        &--active {
+            color: $brightBlue;
+        }
+    }
+
+    &__instruction {
+        font-family: $font-family;
+        font-size: .9rem;
+        color: $darkGrayishBlue;
+        position: absolute;
+        bottom: 0;
+        transform: translate(0, 400%);
+        cursor: default;
+
+        @include transition(color)
+    }
+}

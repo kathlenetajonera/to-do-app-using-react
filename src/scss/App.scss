@@ -1,0 +1,59 @@
+@import "./variables&mixins";
+@import "./header.scss";
+@import "./container.scss";
+@import "./darkTheme.scss";
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    box-sizing: inherit;
+    margin: 0;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+//global class
+.checkbox {
+    width: 1.375rem;
+    height: 1.375rem;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid $lightGrayishBlue;
+    cursor: pointer;
+    @include transition(border);
+
+    &--form {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+    }
+
+    &--checked {
+        background: linear-gradient(45deg, $checkBackground);
+        position: relative;
+        border: none;
+
+        &::after {
+            content: url("../images/icon-check.svg");
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+//footer
+.attribution {
+    font-family: $font-family;
+    font-size: 11px;
+    text-align: center;
+    padding: 1rem 0;
+
+    a { color: hsl(228, 45%, 44%); }
+}

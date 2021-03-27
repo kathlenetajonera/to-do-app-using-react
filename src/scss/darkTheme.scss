@@ -1,0 +1,87 @@
+@import "./variables&mixins";
+
+.dark-theme {
+    .header {
+        background-image: url("../images/bg-mobile-dark.jpg");
+
+        @include media-query(tablet) {
+            background-image: url("../images/bg-desktop-dark.jpg");
+        }
+
+        &__input {
+            background-color: $veryDarkDesaturatedBlue;
+            color: $dark-lightGrayishBlue;
+            
+            &::placeholder {
+                color: $dark-darkGrayishBlue;
+            }
+        }
+
+        &__light-mode {
+            display: block;
+        }
+
+        &__dark-mode {
+            display: none;
+        }
+    }
+
+    .checkbox {
+        border: 1px solid $dark-veryDarkGrayishBlue-2;
+    }
+
+    .container {
+        background-color: $veryDarkBlue;
+    }
+
+    .toDo {
+        background-color: $veryDarkDesaturatedBlue;
+
+        &__list {
+            border-bottom: 1px solid $dark-veryDarkGrayishBlue-2;
+
+            &--dragging {
+                opacity: .5;
+            }
+    
+            &--inactive {
+                background: hsl(235, 17%, 14%);
+            }
+    
+            &--dropzone {
+                background: $veryDarkBlue;
+            }
+        }
+
+        &__text {
+            color: $dark-lightGrayishBlue;
+
+            &--checked {
+                color: $dark-darkGrayishBlue;
+            }
+        }
+    }
+
+    .options {
+        background-color: $veryDarkDesaturatedBlue;
+        color: $dark-darkGrayishBlue;
+
+        &__categories {
+            background-color: $veryDarkDesaturatedBlue;
+
+            @include media-query(tablet) {
+                background-color: initial;
+            }
+        }
+
+        &__category, &__clear {
+            &:hover {
+                color: $darkHover;
+            }
+        }
+        
+        &__instruction {
+            color: $dark-veryDarkGrayishBlue;
+        }
+    }
+}
