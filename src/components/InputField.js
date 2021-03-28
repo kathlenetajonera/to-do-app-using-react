@@ -10,8 +10,18 @@ const InputField = ({ toDoList, setToDoList }) => {
             setToDoList([{ item: toDo, isComplete: false }]);
             setToDo('')
         } else {
-            setToDoList(prev => prev.concat({ item: toDo, isComplete: false }))
-            setToDo('')
+            const isUnique = toDoList.every(list => list.item !== toDo)
+            
+            //check if item is unique & not yet existing on the list
+            if (isUnique) {
+                setToDoList(prev => prev.concat({ item: toDo, isComplete: false }))
+                setToDo('')
+            } else {
+                const existingItem = toDoList.find(list => list.item === toDo);
+                // const existingIndex = toDoList.indexOf(existingItem)
+
+                console.log(existingItem);
+            }
         }
     }
 

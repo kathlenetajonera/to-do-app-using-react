@@ -16,14 +16,6 @@
                 color: $dark-darkGrayishBlue;
             }
         }
-
-        &__light-mode {
-            display: block;
-        }
-
-        &__dark-mode {
-            display: none;
-        }
     }
 
     .checkbox {
@@ -39,18 +31,6 @@
 
         &__list {
             border-bottom: 1px solid $dark-veryDarkGrayishBlue-2;
-
-            &--dragging {
-                opacity: .5;
-            }
-    
-            &--inactive {
-                background: hsl(235, 17%, 14%);
-            }
-    
-            &--dropzone {
-                background: $veryDarkBlue;
-            }
         }
 
         &__text {

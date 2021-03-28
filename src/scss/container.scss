@@ -9,7 +9,9 @@
     @include transition(background-color);
 
     &__inner {
-        transform: translateY(-3rem);
+        // transform: translateY(-3rem);
+        position: relative;
+        top: -3rem;
     }
 }
 
@@ -31,18 +33,6 @@
         border-bottom: 1px solid $veryLightGray;
         @include transition(border-bottom);
         cursor: pointer;
-
-        &--dragging {
-            opacity: .5;
-        }
-
-        &--inactive {
-            background: rgb(235, 235, 235);
-        }
-
-        &--dropzone {
-            background: rgb(214, 212, 212);
-        }
 
         @include media-query(tablet) {
             &:hover {

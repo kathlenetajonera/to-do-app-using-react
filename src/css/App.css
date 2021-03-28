@@ -16,10 +16,6 @@
       background-image: url("../images/bg-desktop-light.jpg"); } }
   .header__toggle-btn {
     cursor: pointer; }
-  .header__light-mode {
-    display: none; }
-  .header__dark-mode {
-    display: block; }
   .header__container {
     display: flex;
     justify-content: space-between;
@@ -52,7 +48,8 @@
   background-color: #fafafa;
   transition: background-color 0.2s ease-in-out; }
   .container__inner {
-    transform: translateY(-3rem); }
+    position: relative;
+    top: -3rem; }
 
 .toDo {
   list-style-type: none;
@@ -70,12 +67,6 @@
     border-bottom: 1px solid #fafafa;
     transition: border-bottom 0.2s ease-in-out;
     cursor: pointer; }
-    .toDo__list--dragging {
-      opacity: .5; }
-    .toDo__list--inactive {
-      background: #ebebeb; }
-    .toDo__list--dropzone {
-      background: #d6d4d4; }
     @media (min-width: 48rem) {
       .toDo__list:hover .toDo__remove {
         display: block; } }
@@ -164,10 +155,6 @@
     color: #cacde8; }
     .dark-theme .header__input::placeholder {
       color: #777a92; }
-  .dark-theme .header__light-mode {
-    display: block; }
-  .dark-theme .header__dark-mode {
-    display: none; }
 
 .dark-theme .checkbox {
   border: 1px solid #393a4c; }
@@ -179,12 +166,6 @@
   background-color: #25273c; }
   .dark-theme .toDo__list {
     border-bottom: 1px solid #393a4c; }
-    .dark-theme .toDo__list--dragging {
-      opacity: .5; }
-    .dark-theme .toDo__list--inactive {
-      background: #1e1f2a; }
-    .dark-theme .toDo__list--dropzone {
-      background: #161722; }
   .dark-theme .toDo__text {
     color: #cacde8; }
     .dark-theme .toDo__text--checked {
