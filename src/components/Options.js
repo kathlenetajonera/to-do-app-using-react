@@ -1,7 +1,7 @@
-const Options = ({ setFilter, clearCompleted }) => {
+const Options = ({ setFilter, clearCompleted, remainingTaskCount }) => {
     return (
         <div className="options">
-            <p className="options__remaining"></p>
+            <p className="options__remaining">{`${remainingTaskCount} ${remainingTaskCount > 1 ? 'items' : 'item'} left`}</p>
         
             <div className="options__categories">
                 <p 

@@ -6,7 +6,15 @@ import Options from "./Options";
 const Container = ({ theme, toDoList, setToDoList }) => {
     const [listToRender, setListToRender] = useState(null);
     const [filter, setFilter] = useState(null);
+    const [remainingTaskCount, setRemainingTaskCount] = useState(null);
     const filterButtons = document.querySelectorAll(".options__category");
+
+    //updates remaining task count every render
+    useEffect(() => {
+        const incompleteTasksCount = toDoList.filter(list => list.isComplete === false).length;
+
+        setRemainingTaskCount(incompleteTasksCount);
+    })
 
     //updates the list to render everytime there's changes on the toDoList
     useEffect(() => {
@@ -30,6 +38,8 @@ const Container = ({ theme, toDoList, setToDoList }) => {
                 render(completedList)
             } else render(toDoList);
         }
+
+        console.log("render");
   
     }, [toDoList, filter])
 
@@ -68,15 +78,32 @@ const Container = ({ theme, toDoList, setToDoList }) => {
         //return if dragged on the same position
         if (result.destination.droppableId === result.source.droppableId && result.destination.index === result.source.index) return;
 
-        //creates a copy of the todoList state
-        const updatedList = toDoList.slice(0);
-        const draggedItem = updatedList[result.source.index]
+        const toDoListCopy = toDoList.slice(0);
+        const renderList = listToRender.slice(0);
+        
+        //in All tab list, mutate the list as is
+        if (toDoListCopy.length === renderList.length) {
+            const draggedItem = toDoListCopy[result.source.index];
 
-        //removes the draggedItem on the initial position and inserts to the new position
-        updatedList.splice(result.source.index, 1);
-        updatedList.splice(result.destination.index, 0, draggedItem);
+            //removes the draggedItem on the initial position and inserts to the new position
+            toDoListCopy.splice(result.source.index, 1);
+            toDoListCopy.splice(result.destination.index, 0, draggedItem);
 
-        setToDoList(updatedList);
+            setToDoList(toDoListCopy);
+            console.log(toDoListCopy);
+        } else {
+
+            //in Active/Completed tab lists, get the source & destination index from the render list, then match on the original list
+            const adjustedDestinationIndex = toDoListCopy.indexOf(renderList[result.destination.index]);
+            const adjustedSourceItem = toDoListCopy.find(list => list.item === renderList[result.source.index].item)
+            const adjustedSourceIndex = toDoListCopy.indexOf(adjustedSourceItem);
+            
+            toDoListCopy.splice(adjustedSourceIndex, 1); //removes the item from the original position
+            toDoListCopy.splice(adjustedDestinationIndex, 0, adjustedSourceItem); //inserts the dragged item on the destination index
+            
+            setToDoList(toDoListCopy);
+            console.log(toDoListCopy);
+        }
     }
 
     return (
@@ -114,6 +141,7 @@ const Container = ({ theme, toDoList, setToDoList }) => {
                 : <Options 
                     setFilter={setFilter}
                     clearCompleted={clearCompleted}
+                    remainingTaskCount={remainingTaskCount}
                 />}
             </div>
         </div>
