@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { ThemeContext } from "../context/ThemeContext";
 import deleteBtn from "../images/icon-cross.svg";
 
-const Item  = ({ task, isComplete, handleClick, index, theme }) => {
+const Item  = ({ id, task, isComplete, handleClick, index }) => {
+    const [theme] = useContext(ThemeContext);
+
     return (
-        <Draggable draggableId={task} index={index}>
+        <Draggable draggableId={id} index={index}>
             {(provided, snapshot) => (
                 <li 
                     ref={provided.innerRef}
@@ -12,7 +16,7 @@ const Item  = ({ task, isComplete, handleClick, index, theme }) => {
                     className="toDo__list" 
                     onClick={handleClick} 
                     data-complete={isComplete} 
-                    data-item={task}
+                    data-id={id}
                     style={{ 
                         background: 
                           snapshot.isDragging && theme === "dark" ? "hsl(235, 17%, 14%)"

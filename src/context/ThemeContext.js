@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 
-const useThemeUpdater = () => {
+export const ThemeContext = createContext();
+
+export const ThemeProvider = (props) => {
     const [theme, setTheme] = useState(null);
 
     //sets the theme state based on the device's color mode on the initial render
@@ -16,7 +18,9 @@ const useThemeUpdater = () => {
         theme === "light" ? bodyClass.remove("dark-theme") : bodyClass.add("dark-theme");
     }, [theme])
 
-    return [theme, setTheme]
+    return (
+        <ThemeContext.Provider value={[theme, setTheme]}>
+            {props.children}
+        </ThemeContext.Provider>
+    )
 }
- 
-export default useThemeUpdater;

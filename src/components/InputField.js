@@ -1,27 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const InputField = ({ toDoList, setToDoList }) => {
     const [toDo, setToDo] = useState('');
+    const [id, setId] = useState(0);
+
+    //retrieves the id in localStorage
+    useEffect(() => {
+        if (localStorage.getItem("id")) {
+            setId(parseInt(localStorage.getItem("id")))
+        }
+    }, [])
+
+    //saves id in localStorage, to avoid duplication
+    useEffect(() => {
+        localStorage.setItem("id", id);
+    }, [id])
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setId(prev => prev + 1);
+
         if (toDoList.length === 0) {
-            setToDoList([{ item: toDo, isComplete: false }]);
+            setToDoList([{ id, item: toDo, isComplete: false }]);
             setToDo('')
         } else {
-            const isUnique = toDoList.every(list => list.item !== toDo)
-            
-            //check if item is unique & not yet existing on the list
-            if (isUnique) {
-                setToDoList(prev => prev.concat({ item: toDo, isComplete: false }))
-                setToDo('')
-            } else {
-                const existingItem = toDoList.find(list => list.item === toDo);
-                // const existingIndex = toDoList.indexOf(existingItem)
-
-                console.log(existingItem);
-            }
+            setToDoList(prev => prev.concat({ id, item: toDo, isComplete: false }));
+            setToDo('')
         }
     }
 

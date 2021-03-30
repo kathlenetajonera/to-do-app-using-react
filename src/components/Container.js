@@ -3,7 +3,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Item from "./Item";
 import Options from "./Options";
 
-const Container = ({ theme, toDoList, setToDoList }) => {
+const Container = ({ toDoList, setToDoList }) => {
     const [listToRender, setListToRender] = useState(null);
     const [filter, setFilter] = useState(null);
     const [remainingTaskCount, setRemainingTaskCount] = useState(null);
@@ -45,21 +45,21 @@ const Container = ({ theme, toDoList, setToDoList }) => {
 
     const handleClick = (e) => {
         if (e.target.tagName.toLowerCase() === "img") {
-            const taskToDelete = e.target.parentElement.dataset.item;
-            const updatedList = toDoList.filter(task => task.item !== taskToDelete)
+            const taskToDelete = parseInt(e.target.parentElement.dataset.id);
+            const updatedList = toDoList.filter(task => task.id !== taskToDelete)
 
             setToDoList(updatedList);
             console.log("deleted");
         } else {
-            const selectedItem = e.target.dataset.item;
+            const selectedItem = parseInt(e.target.dataset.id);
             const updatedList = toDoList.map(list => {
-                if (list.item === selectedItem) {
+                if (list.id === selectedItem) {
                     list.isComplete ? list.isComplete = false : list.isComplete = true;
                 }
     
                 return list;
             })
-    
+            
             setToDoList(updatedList);
             console.log("updated");
         }
@@ -120,12 +120,12 @@ const Container = ({ theme, toDoList, setToDoList }) => {
                             {listToRender && listToRender.map((list, index) => {
                                 return (
                                     <Item 
+                                    id={list.id.toString()}
                                     task={list.item} 
                                     isComplete={list.isComplete} 
                                     handleClick={handleClick}
                                     index={index}
-                                    theme={theme}
-                                    key={list.item}
+                                    key={list.item + index}
                                     />
                                 )
                             })} 

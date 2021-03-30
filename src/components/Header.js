@@ -1,11 +1,12 @@
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import darkToggle from "../images/icon-moon.svg";
 import lightToggle from "../images/icon-sun.svg";
 import InputField from "./InputField";
 
-const Header = ({ theme, setTheme, toDoList, setToDoList }) => {
-    const themeToggle = () => {
-        setTheme(prev => prev === "light" ? "dark" : "light" )
-    }
+const Header = ({ toDoList, setToDoList }) => {
+    const [theme, setTheme] = useContext(ThemeContext); //reads the value from the Context Provider
+    const themeToggle = () => setTheme(prev => prev === "light" ? "dark" : "light" );
 
     return (
         <header className="header">
